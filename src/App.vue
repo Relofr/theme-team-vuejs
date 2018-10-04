@@ -6,13 +6,13 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import ThemeItem from './components/ThemeItem'
 import ThemeList from './components/ThemeList'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld, 
+    ThemeItem, 
     ThemeList
   }
 }
