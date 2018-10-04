@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     removeTheme(id) {
-      eventBus.$emit('removedTheme', id)
+      this.$store.dispatch('deleteTheme', id)
     },
     editTheme() {
       this.beforeEditCache = this.title
@@ -65,13 +65,12 @@ export default {
         this.title = this.beforeEditCache
       }
       this.editing = false
-      eventBus.$emit('finishedEdit', {
+      this.$store.dispatch('updateTheme', {
         'id': this.id,
         'title': this.title,
         'completed': this.completed,
-        'editing': this.editing,
+        'editing': this.editing
       })
-
     },
     cancelEdit() {
       this.title = this.beforeEditCache

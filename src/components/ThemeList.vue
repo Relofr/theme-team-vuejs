@@ -5,7 +5,7 @@
       <theme-filter />
       <div>
         <transition name="fade">
-          <clear-completed :showClearCompletedButton="showClearCompletedButton"/>
+          <clear-completed />
         </transition>
       </div>
     </div>
@@ -23,8 +23,8 @@
     </transition-group>
     
     <div class="extra-container">
-      <theme-check-all :anyRemaining="anyRemaining" />
-      <theme-items-remaining :remaining="remaining" />
+      <theme-check-all />
+      <theme-items-remaining />
     </div>
   </div>
 </template>
@@ -50,57 +50,14 @@ export default {
     return {
       newTheme: "",
       idForTheme: 3,
-      filter: "",
-      themes: [
-        {
-          id: 1,
-          title: "Theme Team 1",
-          completed: false,
-          editing: false
-        },
-        {
-          id: 2,
-          title: "Theme Team 2",
-          completed: false,
-          editing: false
-        }
-      ]
     };
   },
-  created() {
-    eventBus.$on("removedTheme", index => this.removeTheme(index));
-    eventBus.$on("finishedEdit", data => this.finishedEdit(data));
-    eventBus.$on("checkAllChanged", checked => this.checkAllThemes(checked));
-    eventBus.$on("filterChanged", filter => (this.filter = filter));
-    eventBus.$on("clearCompletedTheme", () => this.clearCompleted());
-  },
-  // beforeDestroy() {
-  //   eventBus.$off("removedTheme", (index) => this.removeTheme(index));
-  //   eventBus.$off("finishedEdit", (data) => this.finishedEdit(data));
-  //   eventBus.$off("checkAllChanged", (checked) => this.checkAllThemes(checked));
-  //   eventBus.$off('filterChanged', (filter) => this.filter = filter)
-  //   eventBus.$off('clearCompletedTheme', () => this.clearCompleted())
-  // },
   computed: {
-    remaining() {
-      return this.themes.filter(theme => !theme.completed).length;
-    },
     anyRemaining() {
-      return this.remaining != 0;
+      return this.$store.getters.anyRemaining
     },
     themesFiltered() {
-      if (this.filter == "all") {
-        return this.themes;
-      } else if (this.filter == "active") {
-        return this.themes.filter(theme => !theme.completed);
-      } else if (this.filter == "completed") {
-        return this.themes.filter(theme => theme.completed);
-      }
-
-      return this.themes;
-    },
-    showClearCompletedButton() {
-      return this.themes.filter(theme => theme.completed).length > 0;
+      return this.$store.getters.themesFiltered
     }
   },
   methods: {
@@ -109,28 +66,13 @@ export default {
         return;
       }
 
-      this.themes.push({
+      this.$store.dispatch('addTheme', {
         id: this.idForTheme,
         title: this.newTheme,
-        completed: false
-      });
+      })
 
       this.newTheme = "";
       this.idForTheme++;
-    },
-    removeTheme(id) {
-      const index = this.themes.findIndex(item => item.id == id);
-      this.themes.splice(index, 1);
-    },
-    checkAllThemes() {
-      this.themes.forEach(theme => (theme.completed = event.target.checked));
-    },
-    clearCompleted() {
-      this.themes = this.themes.filter(theme => !theme.completed);
-    },
-    finishedEdit(data) {
-      const index = this.themes.findIndex(item => item.id == data.id);
-      this.themes.splice(index, 1, data);
     }
   }
 };
