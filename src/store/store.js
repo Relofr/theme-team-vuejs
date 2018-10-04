@@ -79,32 +79,32 @@ export const store = new Vuex.Store({
     addTheme(context, theme) {
       setTimeout(() => {
         context.commit('addTheme', theme)
-      }, 1000)
+      })
     },
     clearCompleted(context) {
       setTimeout(() => {
         context.commit('clearCompleted')
-      }, 1000)
+      })
     },
     updateFilter(context, filter) {
       setTimeout(() => {
         context.commit('updateFilter', filter)
-      }, 1000)
+      })
     },
     checkAll(context, checked) {
       setTimeout(() => {
         context.commit('checkAll', checked)
-      }, 1000)
+      })
     },
     deleteTheme(context, id) {
       setTimeout(() => {
         context.commit('deleteTheme', id)
-      }, 1000)
+      })
     },
     updateTheme(context, theme) {
       setTimeout(() => {
         context.commit('updateTheme', theme)
-      }, 1000)
+      })
     }
   }
 })

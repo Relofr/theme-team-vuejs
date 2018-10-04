@@ -32,7 +32,6 @@ body {
 }
 
 .container {
-  max-width: 75%;
   min-width: 600px;
   margin: 0 auto;
   background: #fff;
@@ -51,9 +50,11 @@ body {
 }
 
 .delete-icon {
-  display: block;
-  margin: 20px auto;
-  height: .8em;
+  cursor: pointer;
+  float: right;
+  width: 24px;
+  height: 24px;
+  margin: 0px -3px 5px;
 }
 
 [type="checkbox"]+span:not(.lever) {
@@ -63,7 +64,7 @@ body {
   display: inline-block;
   top: 5px;
   height: 25px;
-  line-height: 25px;
+  line-height: 22px;
   font-size: 1rem;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -74,9 +75,11 @@ body {
 .image-container {
   background-size: cover;
   width: 100%;
-  height: 250px;
+  height: 275px;
   resize: both;
   overflow: hidden;
+  border-radius: 10px;
+  margin: 0px 0px 15px;
 }
 
 img {

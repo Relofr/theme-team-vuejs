@@ -12,7 +12,7 @@
       <input v-else class="theme-item-edit" type="text" v-model="title" @blur="doneEdit" @keyup.enter="doneEdit" @keyup.esc="cancelEdit" v-focus>
     </div>
     
-    <div class="remove-item" @click="removeTheme(theme.id)">
+    <div @click="removeTheme(theme.id)">
       <img src="../assets/delete.svg" class="delete-icon">
     </div>
   </div>
@@ -81,6 +81,13 @@ export default {
 </script>
 
 <style lang='scss'>
+
+.remove-item {
+  cursor: pointer;
+  margin-left: 14px;
+  display: block;
+}
+
 [type="checkbox"]:checked+span:not(.lever):before {
     top: -4px;
     left: -5px;
@@ -88,8 +95,8 @@ export default {
     height: 22px;
     border-top: 2px solid transparent;
     border-left: 2px solid transparent;
-    border-right: 2px solid #A52A2A !important;
-    border-bottom: 2px solid #A52A2A !important;
+    border-right: 2px solid #70B04A !important;
+    border-bottom: 2px solid #70B04A !important;
     -webkit-transform: rotate(40deg);
     transform: rotate(40deg);
     -webkit-backface-visibility: hidden;
@@ -105,8 +112,8 @@ export default {
     height: 13px;
     border-top: 2px solid transparent;
     border-left: 2px solid transparent;
-    border-right: 2px solid #A52A2A !important;
-    border-bottom: 2px solid #A52A2A !important;
+    border-right: 2px solid #70B04A !important;
+    border-bottom: 2px solid #70B04A !important;
     -webkit-transform: rotateZ(37deg);
     transform: rotateZ(37deg);
     -webkit-transform-origin: 100% 100%;

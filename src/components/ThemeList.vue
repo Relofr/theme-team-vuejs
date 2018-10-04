@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="text" class="theme-input" placeholder="Add a theme" v-model="newTheme" @keyup.enter="addTheme" autofocus>
-    <div class="extra-container buttons">
+    <div class="extra-container" id='buttons'>
       <theme-filter />
       <div>
         <transition name="fade">
@@ -23,7 +23,7 @@
     </transition-group>
     
     <div class="extra-container">
-      <theme-check-all />
+      <theme-check-all id="check-all-container"/>
       <theme-items-remaining />
     </div>
   </div>
@@ -81,25 +81,20 @@ export default {
 <style lang="scss">
 .theme-input {
   width: 100%;
-  color: #a52a2a;
 }
 ::placeholder {
   color: #cccccc;
+  font-size: 22px;
 }
 .theme-item {
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   animation-duration: 0.3s;
   border-radius: 10px;
-  padding: 5px 15px;
   transition: ease-in-out 0.3s;
-}
-.remove-item {
-  cursor: pointer;
-  margin-left: 14px;
-  display: block;
+  padding: 5px 15px 2px;
+  margin: 10px 0px;
 }
 
 .theme-item-left {
@@ -109,6 +104,7 @@ export default {
 .theme-item-label {
   padding: 10px;
   margin-left: 12px;
+  font-size: 16px;
 }
 .theme-item-edit {
   font-size: 24px;
@@ -122,31 +118,39 @@ export default {
   }
 }
 .completed {
-  color: white;
-  background: #a52a2a;
   transition: ease-in-out 0.3s;
+  background-color: #70B04A;
+  padding: 5px 15px 2px;
 }
 .extra-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 16px;
-  padding-top: 14px;
-  margin-bottom: 14px;
-  padding-left: 15px;
 }
 
 .btn {
-  background-color: #4682b4;
+  border: 1px solid #4682b4;
+  border-radius: 50px;
+  background-color: transparent;
+  color: #4682b4;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  margin-right: 10px;
   &:focus {
-    background-color: #a52a2a;
+    background-color: #4682b4;
+    color: #fff;
+    box-shadow: none;
   }
   &:hover {
-    background-color: #a52a2a;
+    background-color: #4682b4;
+    color: #fff;
+    box-shadow: none;
   }
 }
 .active {
-  background: #a52a2a;
+  background: #4682b4;
+  color: #fff;
 }
 
 .fade-enter-active,
@@ -156,5 +160,21 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+#check-all-container {
+  padding: 5px 15px 2px;
+}
+
+#buttons {
+  padding: 15px 0px;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: 1px solid #4682b4;
+  -webkit-box-shadow: 0 1px 0 0 #4682b4;
+  box-shadow: 0 1px 0 0 #4682b4;
+  color: black;
+  font-size: 22px;
 }
 </style>
