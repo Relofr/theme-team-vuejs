@@ -92,28 +92,55 @@ export const store = new Vuex.Store({
         })
     },
     clearCompleted(context) {
-      setTimeout(() => {
-        context.commit('clearCompleted')
+      const completed = context.state.themes
+        .filter(theme => theme.completed)
+        .map(theme => theme.id)
+
+      axios.delete('/themesDeleteCompleted', {
+        data: {
+          themes: completed
+        }
       })
+        .then(response => {
+          context.commit('clearCompleted')
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     updateFilter(context, filter) {
-      setTimeout(() => {
-        context.commit('updateFilter', filter)
-      })
+      context.commit('updateFilter', filter)
     },
     checkAll(context, checked) {
-      setTimeout(() => {
-        context.commit('checkAll', checked)
+      axios.patch('/themesCheckAll', {
+        completed: checked,
       })
+        .then(response => {
+          context.commit('checkAll', checked)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     deleteTheme(context, id) {
-      setTimeout(() => {
-        context.commit('deleteTheme', id)
-      })
+      axios.delete('/themes/' + id)
+        .then(response => {
+          context.commit('deleteTheme', id)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     updateTheme(context, theme) {
-      setTimeout(() => {
-        context.commit('updateTheme', theme)
+      axios.patch('/themes/' + theme.id, {
+        title: theme.title,
+        completed: theme.completed
+      })
+        .then(response => {
+          context.commit('updateTheme', response.data)          
+        })
+        .catch(error => {
+          console.log(error)
       })
     }
   }
