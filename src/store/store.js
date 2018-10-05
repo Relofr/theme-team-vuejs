@@ -1,24 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
+axios.defaults.baseURL = 'http://theme-team-laravel.test/api'
 
 export const store = new Vuex.Store({
   state: {
     filter: "",
     themes: [
-      {
-        id: 1,
-        title: "Theme Team 1",
-        completed: false,
-        editing: false
-      },
-      {
-        id: 2,
-        title: "Theme Team 2",
-        completed: false,
-        editing: false
-      }
+      
     ]
   },
   getters: {
@@ -73,13 +64,32 @@ export const store = new Vuex.Store({
         'completed': theme.completed,
         'editing': theme.editing
       });
+    },
+    retreiveThemes(state, themes) {
+      state.themes = themes
     }
   },
   actions: {
+    retreiveThemes(context) {
+      axios.get('/themes')
+        .then(response => {
+          context.commit('retreiveThemes', response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     addTheme(context, theme) {
-      setTimeout(() => {
-        context.commit('addTheme', theme)
+      axios.post('/themes', {
+        title: theme.title,
+        completed: false
       })
+        .then(response => {
+          context.commit('addTheme', response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     clearCompleted(context) {
       setTimeout(() => {

@@ -52,6 +52,9 @@ export default {
       idForTheme: 3,
     };
   },
+  created() {
+    this.$store.dispatch('retreiveThemes')
+  },
   computed: {
     anyRemaining() {
       return this.$store.getters.anyRemaining
